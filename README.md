@@ -15,4 +15,4 @@ Please read our [contributing guidelines](https://github.com/spurintel/javascrip
 
 ## License
 
-This project is licensed under the [MIT license](https://github.com/spurintel/javascript/blob/main/packages/LICENSE).
+This project is licensed under the [MIT license](https://github.com/spurintel/javascript/blob/main/LICENSE).
