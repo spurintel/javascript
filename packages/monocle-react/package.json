@@ -1,0 +1,37 @@
+{
+  "name": "@spur/monocle-react",
+  "version": "1.0.0",
+  "description": "Monocle React library",
+  "keywords": [
+    "spur",
+    "monocle",
+    "react"
+  ],
+  "homepage": "https://spur.us",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "build:declarations": "tsc -p tsconfig.declarations.json",
+    "clean": "rimraf ./dist",
+    "dev": "tsup --watch",
+    "lint": "eslint src",
+    "publish:local": "pnpm yalc push --replace --sig",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Spur",
+  "license": "ISC",
+  "dependencies": {
+    "@spur.us/types": "workspace:^",
+    "react": "catalog:peer-react",
+    "react-dom": "catalog:peer-react"
+  },
+  "peerDependencies": {
+    "react": "catalog:peer-react",
+    "react-dom": "catalog:peer-react"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@spur.us/types",
+  "version": "1.0.0",
+  "description": "Typings for Spur libraries.",
+  "keywords": [
+    "spur",
+    "types"
+  ],
+  "homepage": "https://spur.us",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsup",
+    "build:declarations": "tsc -p tsconfig.declarations.json",
+    "clean": "rimraf ./dist",
+    "dev": "tsup --watch",
+    "lint": "eslint src",
+    "publish:local": "pnpm yalc push --replace --sig",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Spur",
+  "license": "ISC"
+}

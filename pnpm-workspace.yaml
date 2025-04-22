@@ -1,3 +1,15 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - 'packages/*'
+
+catalogs:
+  react:
+    react: 18.3.1
+    react-dom: 18.3.1
+
+  peer-react:
+    react: ^18.0.0 || ^19.0.0 || ^19.0.0-0
+    react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-0
+
+  repo:
+    tsup: 8.4.0
+    typescript: 5.8.3
