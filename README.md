@@ -14,6 +14,7 @@
     This repository contains all the Spur JavaScript SDKs under the <code>@spur.us</code> namespace.
   </p>
 </div>
+<br />
 
 ## Getting started
 

@@ -1,4 +1,14 @@
-# @spur.us/types
+<div align="center">
+  <a href="https://nextjs.org">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="../../docs/images/logo-dark-mode.svg">
+      <img alt="Spur logo" src="../../docs/images/logo-light-mode.svg" height="128">
+    </picture>
+  </a>
+  <br />
+  <h1>@spur.us/types</h1>
+</div>
+<br />
 
 TypeScript type definitions for Spur's SDKs.
 
