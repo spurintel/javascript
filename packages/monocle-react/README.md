@@ -26,7 +26,7 @@ pnpm add @spur/monocle-react
 
 We welcome all contributors!
 
-Please read our [contributing guidelines](https://github.com/spurintel/javascript/blob/main/CONTRIBUTING.md) to learn how to submit issues or open pull requests.
+Please read our [contributing guidelines](https://github.com/spurintel/javascript/blob/main/docs/CONTRIBUTING.md) to learn how to submit issues or open pull requests.
 
 ## License
 
