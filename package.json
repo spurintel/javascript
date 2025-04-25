@@ -10,9 +10,11 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "test": "turbo run test",
+    "version-packages": "changeset version && pnpm install --lockfile-only --engine-strict=false",
     "yalc:all": "for d in packages/*/; do echo $d; cd $d; pnpm yalc push --replace --sig; cd '../../'; done"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.2",
     "@eslint/js": "^9.25.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
