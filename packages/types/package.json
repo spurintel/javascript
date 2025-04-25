@@ -7,7 +7,15 @@
     "types"
   ],
   "homepage": "https://spur.us",
-  "main": "dist/index.js",
+  "bugs": {
+    "url": "https://github.com/spurintel/javascript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spurintel/javascript.git",
+    "directory": "packages/types"
+  },
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsup",
     "build:declarations": "tsc -p tsconfig.declarations.json",
@@ -17,5 +25,5 @@
     "publish:local": "pnpm yalc push --replace --sig"
   },
   "author": "Spur",
-  "license": "ISC"
+  "license": "MIT"
 }

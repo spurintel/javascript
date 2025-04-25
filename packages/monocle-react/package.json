@@ -8,7 +8,15 @@
     "react"
   ],
   "homepage": "https://spur.us",
-  "main": "dist/index.js",
+  "bugs": {
+    "url": "https://github.com/spurintel/javascript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spurintel/javascript.git",
+    "directory": "packages/monocle-react"
+  },
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsup",
     "build:declarations": "tsc -p tsconfig.declarations.json",
@@ -19,7 +27,7 @@
     "test": "vitest"
   },
   "author": "Spur",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@spur.us/types": "workspace:^"
   },

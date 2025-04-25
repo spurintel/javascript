@@ -1,6 +1,8 @@
 {
-  "name": "monocle-javascript",
+  "name": "@spur.us/javascript",
+  "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "build": "turbo run build",
     "clean": "turbo run clean",
@@ -32,7 +34,7 @@
     "vitest": "^3.1.2",
     "yalc": "1.0.0-pre.53"
   },
-  "packageManager": "pnpm@9.0.0",
+  "packageManager": "pnpm@10.8.0",
   "engines": {
     "node": ">=18"
   }
