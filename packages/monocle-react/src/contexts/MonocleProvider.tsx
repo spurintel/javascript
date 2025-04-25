@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { withMaxAllowedInstancesGuard } from '../utils';
 
 interface MonocleContextType {
   bundle: string | undefined;
@@ -16,7 +17,7 @@ interface MonocleProviderProps {
   publishableKey: string;
 }
 
-export const MonocleProvider: React.FC<MonocleProviderProps> = ({
+const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
   children,
   publishableKey,
 }) => {
@@ -87,6 +88,12 @@ export const MonocleProvider: React.FC<MonocleProviderProps> = ({
     </MonocleContext.Provider>
   );
 };
+
+export const MonocleProvider = withMaxAllowedInstancesGuard(
+  MonocleProviderComponent,
+  'MonocleProvider',
+  'Only one instance of MonocleProvider is allowed'
+);
 
 export const useMonocle = () => {
   const context = useContext(MonocleContext);

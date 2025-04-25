@@ -14,8 +14,7 @@
     "clean": "rimraf ./dist",
     "dev": "tsup --watch",
     "lint": "eslint src",
-    "publish:local": "pnpm yalc push --replace --sig",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "publish:local": "pnpm yalc push --replace --sig"
   },
   "author": "Spur",
   "license": "ISC"

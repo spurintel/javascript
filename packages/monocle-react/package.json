@@ -16,22 +16,15 @@
     "dev": "tsup --watch",
     "lint": "eslint src",
     "publish:local": "pnpm yalc push --replace --sig",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "author": "Spur",
   "license": "ISC",
   "dependencies": {
-    "@spur.us/types": "workspace:^",
-    "react": "catalog:peer-react",
-    "react-dom": "catalog:peer-react"
+    "@spur.us/types": "workspace:^"
   },
   "peerDependencies": {
     "react": "catalog:peer-react",
     "react-dom": "catalog:peer-react"
-  },
-  "devDependencies": {
-    "@types/node": "^20.11.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0"
   }
 }
