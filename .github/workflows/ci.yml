@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Lint and Build
+    name: Linting and Changeset Checks
     timeout-minutes: 15
     runs-on: ubuntu-latest
 
@@ -35,8 +35,11 @@ jobs:
       - name: Build packages
         run: pnpm build
 
+      - name: Require Changeset
+        run: pnpm changeset status --since=origin/main
+
   test:
-    name: Tests
+    name: Unit Tests
     runs-on: ubuntu-latest
 
     steps:
