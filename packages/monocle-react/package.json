@@ -21,9 +21,7 @@
   "author": "Spur",
   "license": "ISC",
   "dependencies": {
-    "@spur.us/types": "workspace:^",
-    "react": "catalog:peer-react",
-    "react-dom": "catalog:peer-react"
+    "@spur.us/types": "workspace:^"
   },
   "peerDependencies": {
     "react": "catalog:peer-react",
