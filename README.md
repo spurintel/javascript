@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://nextjs.org">
+  <a href="https://spur.us">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/images/logo-dark-mode.svg">
       <img alt="Spur logo" src="docs/images/logo-light-mode.svg" height="128">
