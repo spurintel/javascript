@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { MonocleClient } from '../index';
 import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
+import { USER_AGENT } from '../constants';
 
 // Mock fetch
 global.fetch = vi.fn();
@@ -58,6 +59,7 @@ describe('MonocleClient', () => {
             method: 'POST',
             headers: {
               'Content-Type': 'text/plain; charset=utf-8',
+              'User-Agent': USER_AGENT,
               TOKEN: mockSecretKey,
             },
             body: mockEncryptedAssessment,
