@@ -13,5 +13,6 @@ catalogs:
     react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-0
 
   repo:
+    tslib: 2.8.1
     tsup: 8.4.0
     typescript: 5.8.3

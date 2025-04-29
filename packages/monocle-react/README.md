@@ -15,11 +15,11 @@ A React library for integrating Monocle into your React applications. This packa
 ## Installation
 
 ```bash
-npm install @spur/monocle-react
+npm install @spur.us/monocle-react
 # or
-yarn add @spur/monocle-react
+yarn add @spur.us/monocle-react
 # or
-pnpm add @spur/monocle-react
+pnpm add @spur.us/monocle-react
 ```
 
 ## Contributing
