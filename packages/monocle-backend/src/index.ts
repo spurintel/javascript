@@ -1,6 +1,6 @@
 import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
-import { API_URL } from './constants';
+import { API_URL, USER_AGENT } from './constants';
 
 /**
  * Configuration options for creating a MonocleClient instance
@@ -69,6 +69,7 @@ export class MonocleClient {
         method: 'POST',
         headers: {
           'Content-Type': 'text/plain; charset=utf-8',
+          'User-Agent': USER_AGENT,
           TOKEN: this.secretKey,
         },
         body: encryptedAssessment,
