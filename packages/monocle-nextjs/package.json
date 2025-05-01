@@ -1,0 +1,55 @@
+{
+  "name": "@spur.us/monocle-nextjs",
+  "version": "0.0.0",
+  "description": "Monocle Next.js library",
+  "keywords": [
+    "spur",
+    "monocle",
+    "nextjs"
+  ],
+  "homepage": "https://spur.us",
+  "bugs": {
+    "url": "https://github.com/spurintel/javascript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spurintel/javascript.git",
+    "directory": "packages/monocle-nextjs"
+  },
+  "scripts": {
+    "build": "pnpm clean && tsup",
+    "build:declarations": "tsc -p tsconfig.declarations.json",
+    "clean": "rimraf ./dist",
+    "dev": "tsup --watch",
+    "lint": "eslint src",
+    "publish:local": "pnpm yalc push --replace --sig"
+  },
+  "author": "Spur",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./server": {
+      "types": "./dist/types/server/index.d.ts",
+      "import": "./dist/esm/server/index.js",
+      "require": "./dist/cjs/server/index.js"
+    }
+  },
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "server"
+  ],
+  "dependencies": {
+    "@spur.us/monocle-backend": "workspace:^",
+    "@spur.us/monocle-react": "workspace:^"
+  },
+  "peerDependencies": {
+    "next": "^13.5.7 || ^14.2.25 || ^15.2.3",
+    "react": "catalog:peer-react",
+    "react-dom": "catalog:peer-react"
+  }
+}

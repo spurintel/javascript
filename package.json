@@ -31,15 +31,22 @@
     "eslint-config-prettier": "^9.1.0",
     "jsdom": "^26.1.0",
     "prettier": "^3.5.3",
+    "rimraf": "^6.0.1",
     "tsup": "catalog:repo",
     "turbo": "^2.5.0",
     "typescript": "catalog:repo",
     "typescript-eslint": "^8.31.0",
     "vitest": "^3.1.2",
-    "yalc": "1.0.0-pre.53"
+    "yalc": "1.0.0-pre.53",
+    "yaml": "^2.7.1"
   },
   "packageManager": "pnpm@10.8.0",
   "engines": {
     "node": ">=18"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "yalc@1.0.0-pre.53": "patches/yalc@1.0.0-pre.53.patch"
+    }
   }
 }
