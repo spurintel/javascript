@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { withMaxAllowedInstancesGuard } from '../utils';
+import { MonocleProviderProps } from '../types';
 
 interface MonocleContextType {
   assessment: string | undefined;
@@ -9,11 +10,6 @@ interface MonocleContextType {
 }
 
 const MonocleContext = createContext<MonocleContextType | null>(null);
-
-interface MonocleProviderProps {
-  children: React.ReactNode;
-  publishableKey: string;
-}
 
 const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
   children,
