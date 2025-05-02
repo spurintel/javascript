@@ -29,7 +29,7 @@ The package needs to be configured with your Monocle application's secret key, w
 ```javascript
 import { createMonocleClient } from '@spur.us/monocle-backend';
 
-const monocleClient = createMonocleClient({
+const monocleClient = await createMonocleClient({
   secretKey: process.env.MONOCLE_SECRET_KEY,
 });
 ```
