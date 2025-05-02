@@ -46,6 +46,13 @@ export interface MonocleLoaderConfig extends MonocleConfig {
 
 export interface MonocleConfig {
   /**
+   * Configure a function handler to be called when a new assessment is received for monocle.
+   * @param assessment
+   * @returns
+   */
+  onAssessment?: (assessment: MonocleAssessment) => void;
+  /**
+   * @deprecated Use onAssessment instead
    * Configure a function handler to be called when a new bundle is received for monocle.
    * @param bundle
    * @returns
@@ -63,6 +70,13 @@ export interface MonocleConfig {
  */
 export interface Monocle {
   /**
+   * Retrieves the current monocle assessment if it exists. If it does
+   * not exist, nothing will be returned. Calling this does not initiate any
+   * new assessment. Monocle makes those determinations and updates on its own.
+   */
+  getAssessment: () => string | undefined;
+  /**
+   * @deprecated Use getAssessment instead
    * Retrieves the current monocle threat bundle if it exists. If it does
    * not exit, nothing will be returned. Calling this does not initiate any
    * new bundle fetch or assessment. Monocle makes those determinations and

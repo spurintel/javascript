@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { withMaxAllowedInstancesGuard } from '../utils';
 
 interface MonocleContextType {
-  bundle: string | undefined;
+  assessment: string | undefined;
   refresh: () => void;
   isLoading: boolean;
   error: Error | null;
@@ -19,7 +19,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
   children,
   publishableKey,
 }) => {
-  const [bundle, setBundle] = useState<string | undefined>(undefined);
+  const [assessment, setAssessment] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -59,8 +59,8 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       setError(null);
       await loadScript();
       if (window.MCL) {
-        const newBundle = window.MCL.getBundle();
-        setBundle(newBundle);
+        const newAssessment = window.MCL.getAssessment();
+        setAssessment(newAssessment);
       } else {
         throw new Error('MCL object not found on window');
       }
@@ -74,14 +74,14 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
   };
 
   useEffect(() => {
-    // Only refresh if the publishableKey changes and we don't already have a bundle
-    if (!bundle) {
+    // Only refresh if the publishableKey changes and we don't already have an assessment
+    if (!assessment) {
       refresh();
     }
   }, [publishableKey]);
 
   return (
-    <MonocleContext.Provider value={{ bundle, refresh, isLoading, error }}>
+    <MonocleContext.Provider value={{ assessment, refresh, isLoading, error }}>
       {children}
     </MonocleContext.Provider>
   );
