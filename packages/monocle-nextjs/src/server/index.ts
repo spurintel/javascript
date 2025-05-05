@@ -1,3 +1,6 @@
 export { monocleClient } from './monocleClient';
 
-export type { MonocleClient } from '@spur.us/monocle-backend';
+export type {
+  MonocleAssessment,
+  MonocleClient,
+} from '@spur.us/monocle-backend';
