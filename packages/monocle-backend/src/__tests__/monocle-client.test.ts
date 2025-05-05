@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { MonocleClient } from '../index';
+import { createMonocleClient, MonocleClient } from '../index';
 import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
 
@@ -35,7 +35,7 @@ describe('MonocleClient', () => {
   let client: MonocleClient;
 
   beforeEach(() => {
-    client = new MonocleClient({
+    client = createMonocleClient({
       secretKey: mockSecretKey,
       baseUrl: mockBaseUrl,
     });
