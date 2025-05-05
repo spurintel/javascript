@@ -1,5 +1,16 @@
 # @spur.us/monocle-nextjs
 
+## 0.3.0
+
+### Minor Changes
+
+- e8758d6: Add `MonocleAssessment` type
+
+### Patch Changes
+
+- Updated dependencies [e8758d6]
+  - @spur.us/monocle-backend@0.2.0
+
 ## 0.2.0
 
 ### Minor Changes
