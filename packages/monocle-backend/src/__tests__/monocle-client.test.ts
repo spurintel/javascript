@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { createMonocleClient, MonocleClient } from '../index';
+import { createMonocleClient, MonocleClient } from '../index.js';
 import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
 
@@ -88,13 +88,19 @@ describe('MonocleClient', () => {
 
       it('should successfully decrypt assessment locally', async () => {
         // Mock jose functions
-        const mockPrivateKey = { type: 'private' } as jose.KeyLike;
+        const mockPrivateKey = {
+          type: 'private',
+          algorithm: { name: 'ECDH-ES' },
+          extractable: true,
+          usages: ['decrypt'],
+        } as CryptoKey;
         const mockDecryptResult = {
           plaintext: new TextEncoder().encode(
             JSON.stringify(mockDecryptedAssessment)
           ),
+          protectedHeader: { alg: 'ECDH-ES' },
           key: mockPrivateKey,
-        } as jose.CompactDecryptResult & jose.ResolvedKey<jose.KeyLike>;
+        } as jose.CompactDecryptResult & { key: CryptoKey };
 
         vi.mocked(jose.importPKCS8).mockResolvedValueOnce(mockPrivateKey);
         vi.mocked(jose.compactDecrypt).mockResolvedValueOnce(mockDecryptResult);

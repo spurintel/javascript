@@ -1,6 +1,7 @@
 {
   "name": "@spur.us/monocle-backend",
   "version": "0.2.0",
+  "type": "module",
   "description": "Monocle Backend SDK - REST client for Backend Decryption & Decryption API",
   "keywords": [
     "spur",
@@ -33,7 +34,7 @@
     "tslib": "catalog:repo"
   },
   "devDependencies": {
-    "jose": "^5.2.0",
+    "jose": "^6.0.11",
     "vitest": "^1.3.1"
   }
 }

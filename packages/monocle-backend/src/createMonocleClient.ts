@@ -1,5 +1,5 @@
-import { MonocleClient } from './monocleClient';
-import { MonocleOptions } from './types';
+import { MonocleClient } from './monocleClient.js';
+import { MonocleOptions } from './types.js';
 
 /**
  * Creates a new MonocleClient instance

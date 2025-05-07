@@ -1,7 +1,7 @@
 import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
-import { API_URL, USER_AGENT } from './constants';
-import { MonocleOptions } from './types';
+import { API_URL, USER_AGENT } from './constants.js';
+import { MonocleOptions } from './types.js';
 
 /**
  * Options for decrypting an assessment
