@@ -1,5 +1,11 @@
 # @spur.us/monocle-backend
 
+## 0.2.1
+
+### Patch Changes
+
+- a6a5687: Upgrading jose@6.0.11
+
 ## 0.2.0
 
 ### Minor Changes
