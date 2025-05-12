@@ -20,7 +20,7 @@
       "persistent": true
     },
     "test": {
-      "dependsOn": ["^test"],
+      "dependsOn": ["^test", "build"],
       "outputs": ["coverage/**"]
     }
   }
