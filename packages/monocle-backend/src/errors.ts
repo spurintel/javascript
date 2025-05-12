@@ -42,6 +42,7 @@ export class MonocleError extends CustomError {
     }
   ) {
     super(options);
+    this.name = 'MonocleError';
   }
 }
 
@@ -61,6 +62,7 @@ export class MonocleAPIError extends MonocleError {
       code: errorCodes.API_REQUEST_FAILED,
       message: `API request failed with status ${status}: ${statusText}`,
     });
+    this.name = 'MonocleAPIError';
   }
 }
 
@@ -81,6 +83,7 @@ export class MonocleDecryptionError extends MonocleError {
       code: errorCodes.DECRYPTION_FAILED,
       message: `Local decryption failed: ${message}`,
     });
+    this.name = 'MonocleDecryptionError';
   }
 }
 
