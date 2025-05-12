@@ -1,6 +1,6 @@
 {
   "name": "@spur.us/monocle-backend",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "type": "module",
   "description": "Monocle Backend SDK - REST client for Backend Decryption & Decryption API",
   "keywords": [

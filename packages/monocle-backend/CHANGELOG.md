@@ -1,5 +1,11 @@
 # @spur.us/monocle-backend
 
+## 0.3.3
+
+### Patch Changes
+
+- 0aae220: Add `name` property to errors
+
 ## 0.3.2
 
 ### Patch Changes
