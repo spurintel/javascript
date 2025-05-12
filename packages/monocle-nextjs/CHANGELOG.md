@@ -1,5 +1,12 @@
 # @spur.us/monocle-nextjs
 
+## 0.3.3
+
+### Patch Changes
+
+- Updated dependencies [a3bf3e8]
+  - @spur.us/monocle-backend@0.3.0
+
 ## 0.3.2
 
 ### Patch Changes

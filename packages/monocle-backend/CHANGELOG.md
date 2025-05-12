@@ -1,5 +1,11 @@
 # @spur.us/monocle-backend
 
+## 0.3.0
+
+### Minor Changes
+
+- a3bf3e8: Add `MonocleAPIError` and `MonocleDecryptionError` types
+
 ## 0.2.1
 
 ### Patch Changes
