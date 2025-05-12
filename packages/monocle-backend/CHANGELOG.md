@@ -1,5 +1,11 @@
 # @spur.us/monocle-backend
 
+## 0.3.4
+
+### Patch Changes
+
+- cdb573b: Fix error exports
+
 ## 0.3.3
 
 ### Patch Changes
