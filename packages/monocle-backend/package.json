@@ -30,6 +30,7 @@
   "author": "Spur",
   "license": "MIT",
   "dependencies": {
+    "@spur.us/shared": "workspace:^",
     "@spur.us/types": "workspace:^",
     "tslib": "catalog:repo"
   },

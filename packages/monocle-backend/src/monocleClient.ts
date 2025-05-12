@@ -2,6 +2,12 @@ import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
 import { API_URL, USER_AGENT } from './constants.js';
 import { MonocleOptions } from './types.js';
+import {
+  MonocleAPIError,
+  MonocleDecryptionError,
+  throwError,
+  errorCodes,
+} from './errors.js';
 
 /**
  * Options for decrypting an assessment
@@ -25,6 +31,11 @@ export class MonocleClient {
    * @param options - Configuration options for the client
    */
   constructor(options: MonocleOptions) {
+    if (!options.secretKey) {
+      throwError(errorCodes.INVALID_CONFIGURATION, {
+        message: 'Missing secretKey.',
+      });
+    }
     this.secretKey = options.secretKey;
     this.baseUrl = options.baseUrl || API_URL;
   }
@@ -67,17 +78,18 @@ export class MonocleClient {
       });
 
       if (!response.ok) {
-        throw new Error(
-          `Failed to decrypt assessment: HTTP ${response.status} ${response.statusText}`
-        );
+        throw new MonocleAPIError(response.status, response.statusText);
       }
 
       const assessment: MonocleAssessment = await response.json();
       return assessment;
     } catch (error) {
-      throw new Error(
-        error instanceof Error ? error.message : 'Unknown error occurred'
-      );
+      if (error instanceof MonocleAPIError) {
+        throw error;
+      }
+      return throwError(errorCodes.API_REQUEST_FAILED, {
+        message: `Failed to communicate with Monocle API`,
+      });
     }
   }
 
@@ -110,11 +122,7 @@ export class MonocleClient {
 
       return assessment;
     } catch (error) {
-      throw new Error(
-        error instanceof Error
-          ? error.message
-          : 'Failed to decrypt assessment via private key'
-      );
+      throw new MonocleDecryptionError(error);
     }
   }
 }

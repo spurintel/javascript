@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "turbo run build",
+    "build:declarations": "turbo run build:declarations",
     "changeset": "changeset",
     "clean": "turbo run clean",
     "dev": "turbo run dev",
