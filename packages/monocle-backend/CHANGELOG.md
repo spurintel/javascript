@@ -1,5 +1,11 @@
 # @spur.us/monocle-backend
 
+## 0.3.1
+
+### Patch Changes
+
+- d3f5c8e: Fix dependency issue
+
 ## 0.3.0
 
 ### Minor Changes
