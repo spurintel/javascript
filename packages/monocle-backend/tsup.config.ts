@@ -16,6 +16,7 @@ export default defineConfig((overrideOptions) => {
     clean: true,
     minify: false,
     sourcemap: true,
+    noExternal: ['@spur.us/shared'],
     define: {
       PACKAGE_NAME: `"${name}"`,
       PACKAGE_VERSION: `"${version}"`,
