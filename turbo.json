@@ -7,6 +7,11 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": ["dist/**"]
     },
+    "build:declarations": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**/*.d.ts", "dist/**/*.d.ts.map"]
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
@@ -15,7 +20,7 @@
       "persistent": true
     },
     "test": {
-      "dependsOn": ["^test"],
+      "dependsOn": ["^test", "build"],
       "outputs": ["coverage/**"]
     }
   }

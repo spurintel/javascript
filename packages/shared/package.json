@@ -1,0 +1,34 @@
+{
+  "name": "@spur.us/shared",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared utilities for Spur packages (monorepo internal only)",
+  "keywords": [
+    "spur",
+    "shared"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./error": {
+      "types": "./dist/error.d.mts",
+      "import": "./dist/error.mjs",
+      "require": "./dist/cjs/error.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "build:declarations": "tsc -p tsconfig.declarations.json",
+    "clean": "rimraf ./dist",
+    "dev": "tsup --watch",
+    "lint": "eslint src"
+  },
+  "dependencies": {
+    "tslib": "catalog:repo"
+  }
+}

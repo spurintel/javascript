@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { createMonocleClient, MonocleClient } from '../index.js';
 import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
+import { MonocleAPIError, MonocleDecryptionError } from '../errors.js';
 
 // Mock fetch
 global.fetch = vi.fn();
@@ -42,6 +43,18 @@ describe('MonocleClient', () => {
     vi.clearAllMocks();
   });
 
+  describe('createMonocleClient', () => {
+    it('should throw error when secret key is missing', () => {
+      expect(() =>
+        createMonocleClient({
+          baseUrl: mockBaseUrl,
+          // @ts-expect-error Testing missing secretKey
+          secretKey: undefined,
+        })
+      ).toThrow('[@spur.us/monocle-backend] Missing secretKey.');
+    });
+  });
+
   describe('decryptAssessment', () => {
     describe('via API', () => {
       it('should successfully decrypt assessment via API', async () => {
@@ -74,10 +87,10 @@ describe('MonocleClient', () => {
           statusText: 'Internal Server Error',
         } as Response);
 
-        await expect(
-          client.decryptAssessment(mockEncryptedAssessment)
-        ).rejects.toThrow(
-          'Failed to decrypt assessment: HTTP 500 Internal Server Error'
+        const promise = client.decryptAssessment(mockEncryptedAssessment);
+        await expect(promise).rejects.toThrow(MonocleAPIError);
+        await expect(promise).rejects.toThrow(
+          '[@spur.us/monocle-backend] API request failed with status 500: Internal Server Error'
         );
       });
     });
@@ -125,11 +138,13 @@ describe('MonocleClient', () => {
           new Error('Invalid key')
         );
 
-        await expect(
-          client.decryptAssessment(mockEncryptedAssessment, {
-            privateKeyPem: mockPrivateKeyPem,
-          })
-        ).rejects.toThrow('Invalid key');
+        const promise = client.decryptAssessment(mockEncryptedAssessment, {
+          privateKeyPem: mockPrivateKeyPem,
+        });
+        await expect(promise).rejects.toThrow(MonocleDecryptionError);
+        await expect(promise).rejects.toThrow(
+          '[@spur.us/monocle-backend] Local decryption failed: Invalid key'
+        );
       });
     });
   });
