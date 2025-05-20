@@ -1,0 +1,89 @@
+name: Canary Release
+
+on:
+  push:
+    branches:
+      - main
+    tags-ignore:
+      - '*'
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  # Check if we should publish canary versions
+  check:
+    name: Check for publishable changes
+    runs-on: ubuntu-latest
+    outputs:
+      has_changes: ${{ steps.changeset.outputs.hasChangesets }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check for changesets
+        id: changeset
+        run: |
+          if find .changeset -name "*.md" -not -name "README.md" | grep -q .; then
+            echo "hasChangesets=true" >> $GITHUB_OUTPUT
+            echo "Changesets found, will publish canary versions"
+          else
+            echo "hasChangesets=false" >> $GITHUB_OUTPUT
+            echo "No changesets found, skipping canary release"
+          fi
+
+  # Publish canary versions if we have changes
+  canary-release:
+    name: Canary Release
+    needs: check
+    if: needs.check.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      id-token: write
+      packages: write
+      pull-requests: write
+      issues: read
+      statuses: write
+      checks: write
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Version packages for canary
+        id: version-packages
+        run: pnpm version-packages:canary
+
+      - name: Build release
+        run: pnpm build
+
+      - name: Canary release
+        run: pnpm release:canary
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

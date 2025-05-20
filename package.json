@@ -12,8 +12,10 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "release": "changeset publish && git push --follow-tags",
+    "release:canary": "changeset publish --tag canary",
     "test": "turbo run test",
     "version-packages": "changeset version && pnpm install --lockfile-only --engine-strict=false",
+    "version-packages:canary": "changeset version --snapshot canary",
     "yalc:all": "for d in packages/*/; do echo $d; cd $d; pnpm yalc push --replace --sig; cd '../../'; done"
   },
   "devDependencies": {
