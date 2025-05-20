@@ -29,6 +29,9 @@ catalogs:
     typescript:
       specifier: 5.8.3
       version: 5.8.3
+    zx:
+      specifier: 8.4.1
+      version: 8.4.1
 
 patchedDependencies:
   yalc@1.0.0-pre.53:
@@ -108,6 +111,9 @@ importers:
       yaml:
         specifier: ^2.7.1
         version: 2.7.1
+      zx:
+        specifier: catalog:repo
+        version: 8.4.1
 
   packages/monocle-backend:
     dependencies:
@@ -2741,6 +2747,11 @@ packages:
     resolution: {integrity: sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg==}
     engines: {node: '>=12.20'}
 
+  zx@8.4.1:
+    resolution: {integrity: sha512-1Cb+Tfwt/daKV6wckBeDbB6h3IMauqj9KWp+EcbYzi9doeJeIHCktxp/yWspXOXRdoUzBCQSKoUgm3g8r9fz5A==}
+    engines: {node: '>= 12.17.0'}
+    hasBin: true
+
 snapshots:
 
   '@adobe/css-tools@4.4.2': {}
@@ -5256,3 +5267,5 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yocto-queue@1.2.1: {}
+
+  zx@8.4.1: {}
