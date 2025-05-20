@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { withMaxAllowedInstancesGuard } from '../utils';
 import { MonocleProviderProps } from '../types';
-
+import { DOMAIN } from '../constants';
 interface MonocleContextType {
   assessment: string | undefined;
   refresh: () => void;
@@ -14,6 +14,7 @@ const MonocleContext = createContext<MonocleContextType | null>(null);
 const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
   children,
   publishableKey,
+  domain = DOMAIN,
 }) => {
   const [assessment, setAssessment] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +38,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       const script = document.createElement('script');
       script.id = '_mcl';
       script.async = true;
-      script.src = `https://mcl.spur.us/d/mcl.js?tk=${publishableKey}`;
+      script.src = `https://${domain}/d/mcl.js?tk=${publishableKey}`;
       script.onload = () => {
         resolve();
       };

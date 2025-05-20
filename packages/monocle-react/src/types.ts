@@ -7,4 +7,6 @@ export interface MonocleProviderProps {
   children: React.ReactNode;
   /** The publishable key used for authentication with Monocle. */
   publishableKey: string;
+  /** Optional base domain for the Monocle API. Defaults to `mcl.spur.us` if not provided */
+  domain?: string;
 }
