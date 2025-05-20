@@ -1,5 +1,11 @@
 # @spur.us/monocle-react
 
+## 1.1.0
+
+### Minor Changes
+
+- 9da3dcc: Allow overriding of Monocle domain
+
 ## 1.0.0
 
 ### Major Changes

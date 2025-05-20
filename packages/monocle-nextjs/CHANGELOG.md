@@ -1,5 +1,17 @@
 # @spur.us/monocle-nextjs
 
+## 0.4.0
+
+### Minor Changes
+
+- 9da3dcc: Allow overriding of Monocle domain
+
+### Patch Changes
+
+- Updated dependencies [9da3dcc]
+  - @spur.us/monocle-backend@0.4.0
+  - @spur.us/monocle-react@1.1.0
+
 ## 0.3.7
 
 ### Patch Changes

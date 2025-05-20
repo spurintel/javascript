@@ -1,5 +1,11 @@
 # @spur.us/monocle-backend
 
+## 0.4.0
+
+### Minor Changes
+
+- 9da3dcc: Allow overriding of Monocle domain
+
 ## 0.3.4
 
 ### Patch Changes
