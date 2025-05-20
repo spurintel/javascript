@@ -15,7 +15,7 @@
     "release:canary": "changeset publish --tag canary",
     "test": "turbo run test",
     "version-packages": "changeset version && pnpm install --lockfile-only --engine-strict=false",
-    "version-packages:canary": "./scripts/canary.mjs",
+    "version-packages:canary": "changeset version --snapshot canary",
     "yalc:all": "for d in packages/*/; do echo $d; cd $d; pnpm yalc push --replace --sig; cd '../../'; done"
   },
   "devDependencies": {
@@ -41,8 +41,7 @@
     "typescript-eslint": "^8.31.0",
     "vitest": "^3.1.2",
     "yalc": "1.0.0-pre.53",
-    "yaml": "^2.7.1",
-    "zx": "catalog:repo"
+    "yaml": "^2.7.1"
   },
   "packageManager": "pnpm@10.8.0",
   "engines": {

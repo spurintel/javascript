@@ -15,7 +15,7 @@ vi.mock('jose', () => ({
 
 describe('MonocleClient', () => {
   const mockSecretKey = 'test-secret-key';
-  const mockBaseUrl = 'https://api.test.com';
+  const mockBaseDomain = 'test.com';
   const mockEncryptedAssessment = 'encrypted-data';
   const mockDecryptedAssessment: MonocleAssessment = {
     vpn: false,
@@ -38,7 +38,7 @@ describe('MonocleClient', () => {
   beforeEach(() => {
     client = createMonocleClient({
       secretKey: mockSecretKey,
-      baseUrl: mockBaseUrl,
+      baseDomain: mockBaseDomain,
     });
     vi.clearAllMocks();
   });
@@ -47,7 +47,7 @@ describe('MonocleClient', () => {
     it('should throw error when secret key is missing', () => {
       expect(() =>
         createMonocleClient({
-          baseUrl: mockBaseUrl,
+          baseUrl: mockBaseDomain,
           // @ts-expect-error Testing missing secretKey
           secretKey: undefined,
         })
@@ -66,7 +66,7 @@ describe('MonocleClient', () => {
         const result = await client.decryptAssessment(mockEncryptedAssessment);
 
         expect(global.fetch).toHaveBeenCalledWith(
-          `${mockBaseUrl}/api/v1/assessment`,
+          `https://decrypt.${mockBaseDomain}/api/v1/assessment`,
           {
             method: 'POST',
             headers: {

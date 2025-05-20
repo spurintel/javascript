@@ -1,6 +1,6 @@
 import { MonocleAssessment } from '@spur.us/types';
 import * as jose from 'jose';
-import { API_URL, USER_AGENT } from './constants.js';
+import { BASE_DOMAIN, USER_AGENT } from './constants.js';
 import { MonocleOptions } from './types.js';
 import {
   MonocleAPIError,
@@ -24,7 +24,7 @@ export class MonocleClient {
   /** The secret key used for API authentication */
   private secretKey: string;
   /** The base URL for API requests */
-  private baseUrl: string;
+  private decryptApiUrl: string;
 
   /**
    * Creates a new MonocleClient instance
@@ -37,7 +37,7 @@ export class MonocleClient {
       });
     }
     this.secretKey = options.secretKey;
-    this.baseUrl = options.baseUrl || API_URL;
+    this.decryptApiUrl = `https://decrypt.${options.baseDomain || BASE_DOMAIN}`;
   }
 
   /**
@@ -67,7 +67,7 @@ export class MonocleClient {
     encryptedAssessment: string
   ): Promise<MonocleAssessment> {
     try {
-      const response = await fetch(`${this.baseUrl}/api/v1/assessment`, {
+      const response = await fetch(`${this.decryptApiUrl}/api/v1/assessment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'text/plain; charset=utf-8',
