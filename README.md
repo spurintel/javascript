@@ -21,6 +21,26 @@
 1. [Sign up for an account.](https://app.spur.us/sign-up?utm_soure=github&utm_medium=spur_js_repo_readme)
 2. Create a Monocle application.
 
+## Packages
+
+Our packages are available on npm under the `@spur.us` namespace.
+
+### Stable Releases
+
+Install the latest stable release:
+
+```bash
+npm install @spur.us/package-name
+```
+
+### Canary Releases
+
+For testing the latest features, you can use our canary releases:
+
+```bash
+npm install @spur.us/package-name@canary
+```
+
 ## Contributing
 
 We welcome all contributors!
