@@ -8,7 +8,12 @@ export interface MonocleOptions {
   baseDomain?: string;
 }
 
+/**
+ * Options for evaluating an assessment
+ */
 export interface EvaluateAssessmentOptions {
+  /** IP address of the client making the request */
   ip?: string;
+  /** Client private data to be used for evaluation */
   cpd?: string;
 }

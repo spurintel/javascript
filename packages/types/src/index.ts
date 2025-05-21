@@ -31,9 +31,20 @@ export interface MonocleAssessment {
   service: string;
 }
 
+/**
+ * A Monocle Policy decision made based on Monocle Assessment data.
+ */
 export interface MonoclePolicyDecision {
+  /**
+   * Indicates whether the connection is allowed based on the policy evaluation.
+   * `true` means the assessment passed all policy checks and is permitted.
+   * `false` means the assessment has been rejected.
+   */
   allowed: boolean;
-  /** The reason for the decision. */
+  /**
+   * A descriptive message explaining the rationale behind the policy decision.
+   * Provides context about why an assessment was allowed or rejected.
+   */
   reason: string;
 }
 
