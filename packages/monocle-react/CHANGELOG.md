@@ -1,5 +1,12 @@
 # @spur.us/monocle-react
 
+## 1.1.1
+
+### Patch Changes
+
+- Updated dependencies [c9b9f35]
+  - @spur.us/types@0.3.0
+
 ## 1.1.0
 
 ### Minor Changes

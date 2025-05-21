@@ -1,5 +1,16 @@
 # @spur.us/monocle-backend
 
+## 0.5.0
+
+### Minor Changes
+
+- c9b9f35: Add `evaluateAssessment` function
+
+### Patch Changes
+
+- Updated dependencies [c9b9f35]
+  - @spur.us/types@0.3.0
+
 ## 0.4.0
 
 ### Minor Changes
