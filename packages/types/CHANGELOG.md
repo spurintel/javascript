@@ -1,5 +1,11 @@
 # @spur.us/types
 
+## 0.3.0
+
+### Minor Changes
+
+- c9b9f35: Add `MonoclePolicyDecision` type
+
 ## 0.2.0
 
 ### Minor Changes
