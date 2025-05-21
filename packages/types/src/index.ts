@@ -31,6 +31,12 @@ export interface MonocleAssessment {
   service: string;
 }
 
+export interface MonoclePolicyDecision {
+  allowed: boolean;
+  /** The reason for the decision. */
+  reason: string;
+}
+
 /**
  * Configuration options for the MonocleLoader. This wrapper crafts the request
  * to the Monocle backend to load the Monocle core library.

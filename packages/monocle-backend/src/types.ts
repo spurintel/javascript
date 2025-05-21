@@ -7,3 +7,8 @@ export interface MonocleOptions {
   /** Optional base domain for the Monocle API. Defaults to `mcl.spur.us` if not provided */
   baseDomain?: string;
 }
+
+export interface EvaluateAssessmentOptions {
+  ip?: string;
+  cpd?: string;
+}
