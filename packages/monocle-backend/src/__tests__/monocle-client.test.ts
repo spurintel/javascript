@@ -148,4 +148,90 @@ describe('MonocleClient', () => {
       });
     });
   });
+
+  describe('evaluateAssessment', () => {
+    const mockPolicyDecision = {
+      allowed: true,
+      reason: 'All checks passed',
+    };
+
+    it('should successfully evaluate assessment', async () => {
+      vi.mocked(global.fetch).mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockPolicyDecision),
+      } as Response);
+
+      const result = await client.evaluateAssessment(mockEncryptedAssessment);
+
+      expect(global.fetch).toHaveBeenCalledWith(
+        `https://decrypt.${mockBaseDomain}/api/v1/policy`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain; charset=utf-8',
+            'User-Agent': '@spur.us/monocle-backend@0.0.0-test',
+            TOKEN: mockSecretKey,
+          },
+          body: JSON.stringify({
+            assessment: mockEncryptedAssessment,
+          }),
+        }
+      );
+      expect(result).toEqual(mockPolicyDecision);
+    });
+
+    it('should pass options to the API when provided', async () => {
+      vi.mocked(global.fetch).mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve(mockPolicyDecision),
+      } as Response);
+
+      const options = { ip: '10.0.0.1', cpd: 'custom-policy' };
+      const result = await client.evaluateAssessment(
+        mockEncryptedAssessment,
+        options
+      );
+
+      expect(global.fetch).toHaveBeenCalledWith(
+        `https://decrypt.${mockBaseDomain}/api/v1/policy`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain; charset=utf-8',
+            'User-Agent': '@spur.us/monocle-backend@0.0.0-test',
+            TOKEN: mockSecretKey,
+          },
+          body: JSON.stringify({
+            assessment: mockEncryptedAssessment,
+            ip: '10.0.0.1',
+            cpd: 'custom-policy',
+          }),
+        }
+      );
+      expect(result).toEqual(mockPolicyDecision);
+    });
+
+    it('should throw error when API request fails with non-200 status', async () => {
+      vi.mocked(global.fetch).mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+        statusText: 'Internal Server Error',
+      } as Response);
+
+      const promise = client.evaluateAssessment(mockEncryptedAssessment);
+      await expect(promise).rejects.toThrow(MonocleAPIError);
+      await expect(promise).rejects.toThrow(
+        '[@spur.us/monocle-backend] API request failed with status 500: Internal Server Error'
+      );
+    });
+
+    it('should throw error when fetch fails', async () => {
+      vi.mocked(global.fetch).mockRejectedValueOnce(new Error('Network error'));
+
+      const promise = client.evaluateAssessment(mockEncryptedAssessment);
+      await expect(promise).rejects.toThrow(
+        '[@spur.us/monocle-backend] Failed to communicate with Monocle API'
+      );
+    });
+  });
 });

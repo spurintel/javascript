@@ -1,7 +1,7 @@
-import { MonocleAssessment } from '@spur.us/types';
+import { MonocleAssessment, MonoclePolicyDecision } from '@spur.us/types';
 import * as jose from 'jose';
 import { BASE_DOMAIN, USER_AGENT } from './constants.js';
-import { MonocleOptions } from './types.js';
+import { EvaluateAssessmentOptions, MonocleOptions } from './types.js';
 import {
   MonocleAPIError,
   MonocleDecryptionError,
@@ -55,6 +55,46 @@ export class MonocleClient {
       return this.decryptLocally(encryptedAssessment, options.privateKeyPem);
     }
     return this.decryptViaApi(encryptedAssessment);
+  }
+
+  /**
+   * Evaluates an assessment against a Monocle Policy.
+   * @param encryptedAssessment - The encrypted assessment to verify
+   * @returns A promise that resolves to the MonoclePolicyDecision
+   * @throws Error if the API request fails
+   */
+  async evaluateAssessment(
+    encryptedAssessment: string,
+    options: EvaluateAssessmentOptions = {}
+  ): Promise<MonoclePolicyDecision> {
+    try {
+      const response = await fetch(`${this.decryptApiUrl}/api/v1/policy`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+          'User-Agent': USER_AGENT,
+          TOKEN: this.secretKey,
+        },
+        body: JSON.stringify({
+          assessment: encryptedAssessment,
+          ...options,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new MonocleAPIError(response.status, response.statusText);
+      }
+
+      const decision: MonoclePolicyDecision = await response.json();
+      return decision;
+    } catch (error) {
+      if (error instanceof MonocleAPIError) {
+        throw error;
+      }
+      return throwError(errorCodes.API_REQUEST_FAILED, {
+        message: `Failed to communicate with Monocle API`,
+      });
+    }
   }
 
   /**
