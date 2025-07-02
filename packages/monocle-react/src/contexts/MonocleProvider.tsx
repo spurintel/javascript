@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 import { withMaxAllowedInstancesGuard } from '../utils';
 import { MonocleProviderProps } from '../types';
 import { DOMAIN } from '../constants';
@@ -50,14 +57,37 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
     });
   };
 
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
       await loadScript();
       if (window.MCL) {
-        const newAssessment = window.MCL.getAssessment();
-        setAssessment(newAssessment);
+        let timeoutId: NodeJS.Timeout | null = null;
+        
+        // Configure MCL with our callback to receive assessment updates
+        await window.MCL.configure({
+          onAssessment: (assessment: string) => {
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+            }
+            setAssessment(assessment);
+            setIsLoading(false);
+          },
+        });
+
+        // Check if assessment is already available
+        const existingAssessment = window.MCL.getAssessment();
+        if (existingAssessment) {
+          setAssessment(existingAssessment);
+          setIsLoading(false);
+        } else {
+          // Set a timeout in case the assessment never comes
+          timeoutId = setTimeout(() => {
+            setError(new Error('Assessment timeout - MCL did not respond within 30 seconds'));
+            setIsLoading(false);
+          }, 30000);
+        }
       } else {
         throw new Error('MCL object not found on window');
       }
@@ -65,20 +95,31 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       setError(
         err instanceof Error ? err : new Error('Unknown error occurred')
       );
-    } finally {
       setIsLoading(false);
     }
-  };
+  }, [publishableKey, domain]);
 
   useEffect(() => {
     // Only refresh if the publishableKey changes and we don't already have an assessment
     if (!assessment) {
       refresh();
     }
-  }, [publishableKey]);
+    
+    // Cleanup function to reset callback on unmount
+    return () => {
+      if (window.MCL) {
+        window.MCL.configure({ onAssessment: undefined });
+      }
+    };
+  }, [publishableKey, domain, assessment, refresh]);
+
+  const contextValue = useMemo(
+    () => ({ assessment, refresh, isLoading, error }),
+    [assessment, refresh, isLoading, error]
+  );
 
   return (
-    <MonocleContext.Provider value={{ assessment, refresh, isLoading, error }}>
+    <MonocleContext.Provider value={contextValue}>
       {children}
     </MonocleContext.Provider>
   );
@@ -90,6 +131,24 @@ export const MonocleProvider = withMaxAllowedInstancesGuard(
   'Only one instance of MonocleProvider is allowed'
 );
 
+/**
+ * Hook to access the Monocle context.
+ *
+ * @returns {MonocleContextType} The Monocle context containing assessment data, loading state, and error information
+ * @throws {Error} When used outside of a MonocleProvider
+ *
+ * @example
+ * ```tsx
+ * function MyComponent() {
+ *   const { assessment, isLoading, error, refresh } = useMonocle();
+ *
+ *   if (isLoading) return <div>Loading...</div>;
+ *   if (error) return <div>Error: {error.message}</div>;
+ *
+ *   return <div>Assessment: {assessment}</div>;
+ * }
+ * ```
+ */
 export const useMonocle = () => {
   const context = useContext(MonocleContext);
   if (!context) {

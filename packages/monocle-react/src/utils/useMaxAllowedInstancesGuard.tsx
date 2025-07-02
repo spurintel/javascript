@@ -32,7 +32,8 @@ export function useMaxAllowedInstancesGuard(
     instanceCounter.set(name, count + 1);
 
     return () => {
-      instanceCounter.set(name, (instanceCounter.get(name) || 1) - 1);
+      const currentCount = instanceCounter.get(name) || 0;
+      instanceCounter.set(name, Math.max(0, currentCount - 1));
     };
   }, []);
 }
