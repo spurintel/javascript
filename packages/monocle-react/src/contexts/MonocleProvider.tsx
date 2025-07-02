@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useState,
   useMemo,
+  useCallback,
 } from 'react';
 import { withMaxAllowedInstancesGuard } from '../utils';
 import { MonocleProviderProps } from '../types';
@@ -56,15 +57,20 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
     });
   };
 
-  const refresh = async () => {
+  const refresh = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
       await loadScript();
       if (window.MCL) {
+        let timeoutId: NodeJS.Timeout | null = null;
+        
         // Configure MCL with our callback to receive assessment updates
         await window.MCL.configure({
           onAssessment: (assessment: string) => {
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+            }
             setAssessment(assessment);
             setIsLoading(false);
           },
@@ -75,9 +81,13 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
         if (existingAssessment) {
           setAssessment(existingAssessment);
           setIsLoading(false);
+        } else {
+          // Set a timeout in case the assessment never comes
+          timeoutId = setTimeout(() => {
+            setError(new Error('Assessment timeout - MCL did not respond within 30 seconds'));
+            setIsLoading(false);
+          }, 30000);
         }
-        // If no existing assessment, the onAssessment callback will be called
-        // when MCL completes its initialization
       } else {
         throw new Error('MCL object not found on window');
       }
@@ -87,18 +97,25 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       );
       setIsLoading(false);
     }
-  };
+  }, [publishableKey, domain]);
 
   useEffect(() => {
     // Only refresh if the publishableKey changes and we don't already have an assessment
     if (!assessment) {
       refresh();
     }
-  }, [publishableKey, assessment]);
+    
+    // Cleanup function to reset callback on unmount
+    return () => {
+      if (window.MCL) {
+        window.MCL.configure({ onAssessment: undefined });
+      }
+    };
+  }, [publishableKey, domain, assessment, refresh]);
 
   const contextValue = useMemo(
     () => ({ assessment, refresh, isLoading, error }),
-    [assessment, isLoading, error]
+    [assessment, refresh, isLoading, error]
   );
 
   return (
