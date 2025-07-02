@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useMemo,
+} from 'react';
 import { withMaxAllowedInstancesGuard } from '../utils';
 import { MonocleProviderProps } from '../types';
 import { DOMAIN } from '../constants';
@@ -56,8 +62,22 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       setError(null);
       await loadScript();
       if (window.MCL) {
-        const newAssessment = window.MCL.getAssessment();
-        setAssessment(newAssessment);
+        // Configure MCL with our callback to receive assessment updates
+        await window.MCL.configure({
+          onAssessment: (assessment: string) => {
+            setAssessment(assessment);
+            setIsLoading(false);
+          },
+        });
+
+        // Check if assessment is already available
+        const existingAssessment = window.MCL.getAssessment();
+        if (existingAssessment) {
+          setAssessment(existingAssessment);
+          setIsLoading(false);
+        }
+        // If no existing assessment, the onAssessment callback will be called
+        // when MCL completes its initialization
       } else {
         throw new Error('MCL object not found on window');
       }
@@ -65,7 +85,6 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       setError(
         err instanceof Error ? err : new Error('Unknown error occurred')
       );
-    } finally {
       setIsLoading(false);
     }
   };
@@ -75,10 +94,15 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
     if (!assessment) {
       refresh();
     }
-  }, [publishableKey]);
+  }, [publishableKey, assessment]);
+
+  const contextValue = useMemo(
+    () => ({ assessment, refresh, isLoading, error }),
+    [assessment, isLoading, error]
+  );
 
   return (
-    <MonocleContext.Provider value={{ assessment, refresh, isLoading, error }}>
+    <MonocleContext.Provider value={contextValue}>
       {children}
     </MonocleContext.Provider>
   );
@@ -90,6 +114,24 @@ export const MonocleProvider = withMaxAllowedInstancesGuard(
   'Only one instance of MonocleProvider is allowed'
 );
 
+/**
+ * Hook to access the Monocle context.
+ *
+ * @returns {MonocleContextType} The Monocle context containing assessment data, loading state, and error information
+ * @throws {Error} When used outside of a MonocleProvider
+ *
+ * @example
+ * ```tsx
+ * function MyComponent() {
+ *   const { assessment, isLoading, error, refresh } = useMonocle();
+ *
+ *   if (isLoading) return <div>Loading...</div>;
+ *   if (error) return <div>Error: {error.message}</div>;
+ *
+ *   return <div>Assessment: {assessment}</div>;
+ * }
+ * ```
+ */
 export const useMonocle = () => {
   const context = useContext(MonocleContext);
   if (!context) {

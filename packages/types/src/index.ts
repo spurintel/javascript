@@ -64,10 +64,10 @@ export interface MonocleLoaderConfig extends MonocleConfig {
 export interface MonocleConfig {
   /**
    * Configure a function handler to be called when a new assessment is received for monocle.
-   * @param assessment
+   * @param assessment The raw assessment string (encrypted bundle)
    * @returns
    */
-  onAssessment?: (assessment: MonocleAssessment) => void;
+  onAssessment?: (assessment: string) => void;
   /**
    * @deprecated Use onAssessment instead
    * Configure a function handler to be called when a new bundle is received for monocle.

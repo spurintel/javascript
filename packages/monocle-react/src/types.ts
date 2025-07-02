@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * Props for the MonocleProvider component.
  * @interface MonocleProviderProps
