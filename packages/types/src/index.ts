@@ -28,7 +28,7 @@ export interface MonocleAssessment {
   /** The name of the Monocle Application. */
   sid: string;
   /** If Monocle is able to identify the service in use, it will be labeled here. This value corresponds to the service tags found here. This field is only exposed to Enterprise Monocle users. */
-  service: string;
+  service?: string;
 }
 
 /**
