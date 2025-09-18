@@ -64,6 +64,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       
       if (window.MCL) {
         await window.MCL.refresh();
+        setIsLoading(false);
       } else {
         throw new Error('MCL object not found on window');
       }
