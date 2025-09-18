@@ -9,9 +9,10 @@ import React, {
 import { withMaxAllowedInstancesGuard } from '../utils';
 import { MonocleProviderProps } from '../types';
 import { DOMAIN } from '../constants';
+
 interface MonocleContextType {
   assessment: string | undefined;
-  refresh: () => void;
+  refresh: () => Promise<void>;
   isLoading: boolean;
   error: Error | null;
 }
@@ -61,10 +62,9 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
     try {
       setIsLoading(true);
       setError(null);
-      
+
       if (window.MCL) {
         await window.MCL.refresh();
-        setIsLoading(false);
       } else {
         throw new Error('MCL object not found on window');
       }
@@ -108,7 +108,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
     if (!assessment) {
       initializeMCL();
     }
-    
+
     // Cleanup function to reset callback on unmount
     return () => {
       if (window.MCL) {
