@@ -1,5 +1,18 @@
 # @spur.us/types
 
+## 0.3.0
+
+### Minor Changes
+
+- c9b9f35: Add `MonoclePolicyDecision` type
+
+### Patch Changes
+
+- abccf0d: Make `service` field optional on `MonocleAssessment` type.
+- 74d2cb6: Fix `onAssessment` function signature in `MonocleConfig` type.
+
+  Fix `MonocleProvider` issue where assessment isn't set.
+
 ## 0.2.0
 
 ### Minor Changes
