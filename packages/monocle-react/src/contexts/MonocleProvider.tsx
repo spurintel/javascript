@@ -61,33 +61,9 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
     try {
       setIsLoading(true);
       setError(null);
-      await loadScript();
+      
       if (window.MCL) {
-        let timeoutId: NodeJS.Timeout | null = null;
-        
-        // Configure MCL with our callback to receive assessment updates
-        await window.MCL.configure({
-          onAssessment: (assessment: string) => {
-            if (timeoutId) {
-              clearTimeout(timeoutId);
-            }
-            setAssessment(assessment);
-            setIsLoading(false);
-          },
-        });
-
-        // Check if assessment is already available
-        const existingAssessment = window.MCL.getAssessment();
-        if (existingAssessment) {
-          setAssessment(existingAssessment);
-          setIsLoading(false);
-        } else {
-          // Set a timeout in case the assessment never comes
-          timeoutId = setTimeout(() => {
-            setError(new Error('Assessment timeout - MCL did not respond within 30 seconds'));
-            setIsLoading(false);
-          }, 30000);
-        }
+        await window.MCL.refresh();
       } else {
         throw new Error('MCL object not found on window');
       }
@@ -97,12 +73,39 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       );
       setIsLoading(false);
     }
-  }, [publishableKey, domain]);
+  }, []);
 
   useEffect(() => {
-    // Only refresh if the publishableKey changes and we don't already have an assessment
+    const initializeMCL = async () => {
+      try {
+        await loadScript();
+        if (window.MCL) {
+          // Configure MCL with our callback to receive assessment updates
+          await window.MCL.configure({
+            onAssessment: (assessment: string) => {
+              setAssessment(assessment);
+              setIsLoading(false);
+            },
+          });
+
+          // Check if assessment is already available
+          const existingAssessment = window.MCL.getAssessment();
+          if (existingAssessment) {
+            setAssessment(existingAssessment);
+            setIsLoading(false);
+          }
+        }
+      } catch (err) {
+        setError(
+          err instanceof Error ? err : new Error('Failed to initialize MCL')
+        );
+        setIsLoading(false);
+      }
+    };
+
+    // Only initialize if we don't already have an assessment
     if (!assessment) {
-      refresh();
+      initializeMCL();
     }
     
     // Cleanup function to reset callback on unmount
@@ -111,7 +114,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
         window.MCL.configure({ onAssessment: undefined });
       }
     };
-  }, [publishableKey, domain, assessment, refresh]);
+  }, [publishableKey, domain]);
 
   const contextValue = useMemo(
     () => ({ assessment, refresh, isLoading, error }),
