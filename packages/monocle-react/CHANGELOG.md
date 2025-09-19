@@ -1,5 +1,21 @@
 # @spur.us/monocle-react
 
+## 1.1.1
+
+### Patch Changes
+
+- f12a046: Fix refresh logic in `MonocleProvider`
+- 74d2cb6: Fix `onAssessment` function signature in `MonocleConfig` type.
+
+  Fix `MonocleProvider` issue where assessment isn't set.
+
+- 5dd4555: Fix refresh return type in `MonocleContextType`
+- a6967b1: Set isLoading to false after successful refresh
+- Updated dependencies [abccf0d]
+- Updated dependencies [74d2cb6]
+- Updated dependencies [c9b9f35]
+  - @spur.us/types@0.3.0
+
 ## 1.1.0
 
 ### Minor Changes
