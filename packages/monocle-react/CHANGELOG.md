@@ -1,5 +1,11 @@
 # @spur.us/monocle-react
 
+## 1.2.0
+
+### Minor Changes
+
+- aa29f26: Add `cpd` param to `MonocleProviderProps`
+
 ## 1.1.1
 
 ### Patch Changes
