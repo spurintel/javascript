@@ -23,6 +23,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
   children,
   publishableKey,
   domain = DOMAIN,
+  cpd,
 }) => {
   const [assessment, setAssessment] = useState<string | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -46,7 +47,13 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       const script = document.createElement('script');
       script.id = '_mcl';
       script.async = true;
-      script.src = `https://${domain}/d/mcl.js?tk=${publishableKey}`;
+
+      let src = `https://${domain}/d/mcl.js?tk=${publishableKey}`;
+      if (cpd) {
+        src += `&cpd=${cpd}`;
+      }
+      script.src = src;
+
       script.onload = () => {
         resolve();
       };
