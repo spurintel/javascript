@@ -42,6 +42,14 @@ export interface MonoclePolicyDecision {
    */
   allowed: boolean;
   /**
+   * The raw assessment that was evaluated.
+   */
+  assessment: MonocleAssessment;
+  /**
+   * The unique identifier for the policy decision.
+   */
+  decisionId: string;
+  /**
    * A descriptive message explaining the rationale behind the policy decision.
    * Provides context about why an assessment was allowed or rejected.
    */
