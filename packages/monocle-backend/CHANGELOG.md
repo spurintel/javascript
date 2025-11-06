@@ -1,5 +1,12 @@
 # @spur.us/monocle-backend
 
+## 0.5.1
+
+### Patch Changes
+
+- Updated dependencies [c303c4b]
+  - @spur.us/types@0.4.0
+
 ## 0.5.0
 
 ### Minor Changes

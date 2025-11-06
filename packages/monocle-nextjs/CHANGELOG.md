@@ -1,5 +1,16 @@
 # @spur.us/monocle-nextjs
 
+## 0.5.0
+
+### Minor Changes
+
+- df3bfef: Add `MonoclePolicyDecision` type
+
+### Patch Changes
+
+- @spur.us/monocle-backend@0.5.1
+- @spur.us/monocle-react@1.2.1
+
 ## 0.4.2
 
 ### Patch Changes

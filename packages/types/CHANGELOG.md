@@ -1,5 +1,11 @@
 # @spur.us/types
 
+## 0.4.0
+
+### Minor Changes
+
+- c303c4b: Add `assessment` and `decisionId` to `MonoclePolicyDecision` type.
+
 ## 0.3.0
 
 ### Minor Changes
