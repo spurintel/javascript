@@ -31,13 +31,32 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
 
   const loadScript = () => {
     return new Promise<void>((resolve, reject) => {
-      const existingScript = document.getElementById('_mcl');
+      const createScriptError = (e: Event | string, scriptUrl: string) => {
+        const errorDetails = [
+          'Failed to load Monocle script',
+          `URL: ${scriptUrl}`,
+        ];
+
+        if (e instanceof ErrorEvent && e.message) {
+          errorDetails.push(`Message: ${e.message}`);
+        }
+
+        if (!navigator.onLine) {
+          errorDetails.push('Device appears to be offline');
+        }
+
+        const error = new Error(errorDetails.join('. '));
+        console.error('MonocleProvider:', error);
+        return error;
+      };
+
+      const existingScript = document.getElementById('_mcl') as HTMLScriptElement;
       if (existingScript) {
         // If script exists but hasn't loaded yet, wait for it
         if (!window.MCL) {
           existingScript.onload = () => resolve();
-          existingScript.onerror = () =>
-            reject(new Error('Failed to load Monocle script'));
+          existingScript.onerror = (e) =>
+            reject(createScriptError(e, existingScript.src));
         } else {
           resolve();
         }
@@ -57,9 +76,8 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
       script.onload = () => {
         resolve();
       };
-      script.onerror = (_e) => {
-        console.error('MonocleProvider: Script failed to load');
-        reject(new Error('Failed to load Monocle script'));
+      script.onerror = (e) => {
+        reject(createScriptError(e, script.src));
       };
       document.head.appendChild(script);
     });
