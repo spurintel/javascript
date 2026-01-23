@@ -31,10 +31,9 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
 
   const loadScript = () => {
     return new Promise<void>((resolve, reject) => {
-      const createScriptError = (e: Event | string, scriptUrl: string) => {
+      const createScriptError = (e: Event | string) => {
         const errorDetails = [
           'Failed to load Monocle script',
-          `URL: ${scriptUrl}`,
         ];
 
         if (e instanceof ErrorEvent && e.message) {
@@ -56,7 +55,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
         if (!window.MCL) {
           existingScript.onload = () => resolve();
           existingScript.onerror = (e) =>
-            reject(createScriptError(e, existingScript.src));
+            reject(createScriptError(e));
         } else {
           resolve();
         }
@@ -77,7 +76,7 @@ const MonocleProviderComponent: React.FC<MonocleProviderProps> = ({
         resolve();
       };
       script.onerror = (e) => {
-        reject(createScriptError(e, script.src));
+        reject(createScriptError(e));
       };
       document.head.appendChild(script);
     });
