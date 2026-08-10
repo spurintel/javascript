@@ -1,1 +1,1 @@
-export const DOMAIN = 'js.mcl.io';
+export const DOMAIN = 'mcl.spur.us';
