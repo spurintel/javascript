@@ -14,7 +14,7 @@ export interface MonocleProviderProps {
    */
   publishableKey: string;
   /**
-   * Optional base domain for the Monocle API. Defaults to `mcl.spur.us` if not provided
+   * Optional base domain for the Monocle API. Defaults to `js.mcl.io` if not provided
    */
   domain?: string;
   /**
