@@ -143,7 +143,7 @@ importers:
         specifier: workspace:^
         version: link:../monocle-react
       next:
-        specifier: ^13.5.7 || ^14.2.25 || ^15.2.3
+        specifier: ^13.5.7 || ^14.2.25 || ^15.2.3 || ^16.0.0
         version: 15.3.1(@babel/core@7.26.10)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react:
         specifier: catalog:peer-react
@@ -1950,6 +1950,7 @@ packages:
   next@15.3.1:
     resolution: {integrity: sha512-8+dDV0xNLOgHlyBxP1GwHGVaNXsmp+2NhZEYrXr24GWLHtt27YrBPbPuHvzlhi7kZNYjeJNR93IF5zfFu5UL0g==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
+    deprecated: This version has a security vulnerability. Please upgrade to a patched version. See https://nextjs.org/blog/CVE-2025-66478 for more details.
     hasBin: true
     peerDependencies:
       '@opentelemetry/api': ^1.1.0
