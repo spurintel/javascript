@@ -51,5 +51,8 @@
     "next": "^13.5.7 || ^14.2.25 || ^15.2.3 || ^16.0.0",
     "react": "catalog:peer-react",
     "react-dom": "catalog:peer-react"
+  },
+  "devDependencies": {
+    "next": "^16.0.0"
   }
 }
