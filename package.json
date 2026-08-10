@@ -36,7 +36,7 @@
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "tsup": "catalog:repo",
-    "turbo": "^2.5.0",
+    "turbo": "^2.9.14",
     "typescript": "catalog:repo",
     "typescript-eslint": "^8.31.0",
     "vitest": "^3.1.2",
