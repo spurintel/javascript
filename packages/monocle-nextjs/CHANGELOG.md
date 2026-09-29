@@ -1,5 +1,19 @@
 # @spur.us/monocle-nextjs
 
+## 0.6.0
+
+### Minor Changes
+
+- c37895d: Accept Next.js 16 as a peer dependency.
+
+  The declared range stopped at `^15.2.3`, so installing into a Next 16 project failed peer resolution and needed `--legacy-peer-deps`. The SDK already worked on Next 16 once installed; only the range was out of date.
+
+### Patch Changes
+
+- Updated dependencies [7a3ad91]
+- Updated dependencies [f1fda46]
+  - @spur.us/monocle-react@1.2.2
+
 ## 0.5.0
 
 ### Minor Changes
