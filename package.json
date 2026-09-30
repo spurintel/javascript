@@ -51,6 +51,9 @@
   "pnpm": {
     "patchedDependencies": {
       "yalc@1.0.0-pre.53": "patches/yalc@1.0.0-pre.53.patch"
+    },
+    "overrides": {
+      "nanoid": "^3.3.18"
     }
   }
 }
