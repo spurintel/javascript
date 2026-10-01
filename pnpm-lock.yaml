@@ -30,8 +30,8 @@ catalogs:
       specifier: 5.8.3
       version: 5.8.3
     zx:
-      specifier: 8.4.1
-      version: 8.4.1
+      specifier: 8.8.5
+      version: 8.8.5
 
 patchedDependencies:
   yalc@1.0.0-pre.53:
@@ -113,7 +113,7 @@ importers:
         version: 2.7.1
       zx:
         specifier: catalog:repo
-        version: 8.4.1
+        version: 8.8.5
 
   packages/monocle-backend:
     dependencies:
@@ -1829,6 +1829,7 @@ packages:
   eslint@9.25.1:
     resolution: {integrity: sha512-E6Mtz9oGQWDCpV12319d59n4tx9zOTXSTmc8BLVxBx+G/0RdM5MvEEJLU9c0+aleoePYYgVTOsRblx433qmhWQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -3115,8 +3116,8 @@ packages:
     resolution: {integrity: sha512-4LCcse/U2MHZ63HAJVE+v71o7yOdIe4cZ70Wpf8D/IyjDKYQLV5GD46B+hSTjJsvV5PztjvHoU580EftxjDZFQ==}
     engines: {node: '>=12.20'}
 
-  zx@8.4.1:
-    resolution: {integrity: sha512-1Cb+Tfwt/daKV6wckBeDbB6h3IMauqj9KWp+EcbYzi9doeJeIHCktxp/yWspXOXRdoUzBCQSKoUgm3g8r9fz5A==}
+  zx@8.8.5:
+    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -5893,4 +5894,4 @@ snapshots:
 
   yocto-queue@1.2.2: {}
 
-  zx@8.4.1: {}
+  zx@8.8.5: {}
