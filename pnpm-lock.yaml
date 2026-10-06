@@ -30,8 +30,8 @@ catalogs:
       specifier: 5.8.3
       version: 5.8.3
     zx:
-      specifier: 8.4.1
-      version: 8.4.1
+      specifier: 8.8.5
+      version: 8.8.5
 
 overrides:
   vite: ^6.4.3
@@ -116,7 +116,7 @@ importers:
         version: 2.7.1
       zx:
         specifier: catalog:repo
-        version: 8.4.1
+        version: 8.8.5
 
   packages/monocle-backend:
     dependencies:
@@ -2784,8 +2784,8 @@ packages:
     resolution: {integrity: sha512-4LCcse/U2MHZ63HAJVE+v71o7yOdIe4cZ70Wpf8D/IyjDKYQLV5GD46B+hSTjJsvV5PztjvHoU580EftxjDZFQ==}
     engines: {node: '>=12.20'}
 
-  zx@8.4.1:
-    resolution: {integrity: sha512-1Cb+Tfwt/daKV6wckBeDbB6h3IMauqj9KWp+EcbYzi9doeJeIHCktxp/yWspXOXRdoUzBCQSKoUgm3g8r9fz5A==}
+  zx@8.8.5:
+    resolution: {integrity: sha512-SNgDF5L0gfN7FwVOdEFguY3orU5AkfFZm9B5YSHog/UDHv+lvmd82ZAsOenOkQixigwH2+yyH198AwNdKhj+RA==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -5357,4 +5357,4 @@ snapshots:
 
   yocto-queue@1.2.2: {}
 
-  zx@8.4.1: {}
+  zx@8.8.5: {}
