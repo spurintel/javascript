@@ -53,7 +53,8 @@
       "yalc@1.0.0-pre.53": "patches/yalc@1.0.0-pre.53.patch"
     },
     "overrides": {
-      "vite": "^6.4.3"
+      "vite": "^6.4.3",
+      "tinypool": "^2.1.2"
     }
   }
 }
