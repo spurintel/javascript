@@ -1,5 +1,12 @@
 # @spur.us/monocle-react
 
+## 1.2.2
+
+### Patch Changes
+
+- 7a3ad91: Remove script src from monocle script error
+- f1fda46: Improve MonocleProvider script load error
+
 ## 1.2.1
 
 ### Patch Changes
