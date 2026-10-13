@@ -54,7 +54,8 @@
     },
     "overrides": {
       "vite": "^6.4.3",
-      "tinypool": "^2.1.2"
+      "tinypool": "^2.1.2",
+      "@vitest/mocker": "^4.1.11"
     }
   }
 }
