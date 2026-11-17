@@ -39,7 +39,7 @@
     "turbo": "^2.9.14",
     "typescript": "catalog:repo",
     "typescript-eslint": "^8.31.0",
-    "vitest": "^3.2.6",
+    "vitest": "^4.1.11",
     "yalc": "1.0.0-pre.53",
     "yaml": "^2.7.1",
     "zx": "catalog:repo"
@@ -54,6 +54,8 @@
     },
     "overrides": {
       "vite": "^6.4.3",
+      "tinypool": "^2.1.2",
+      "@vitest/mocker": "^4.1.12",
       "next": "^15.5.28"
     }
   }
