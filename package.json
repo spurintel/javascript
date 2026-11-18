@@ -55,7 +55,8 @@
     "overrides": {
       "vite": "^6.4.3",
       "tinypool": "^2.1.2",
-      "@vitest/mocker": "^4.1.12"
+      "@vitest/mocker": "^4.1.12",
+      "nanoid": "^3.3.18"
     }
   }
 }
