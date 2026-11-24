@@ -69,7 +69,13 @@ jobs:
         with:
           node-version: 22
           cache: 'pnpm'
-          registry-url: 'https://registry.npmjs.org'
+          # No registry-url: the .npmrc it writes holds a token line that
+          # stops npm from using trusted publishing.
+
+      - name: Upgrade npm for trusted publishing
+        # npm trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 ships npm 10.
+        # pnpm publish hands the upload to this npm.
+        run: npm install -g npm@11.21.2
 
       - name: Install dependencies
         run: pnpm install
@@ -84,8 +90,7 @@ jobs:
 
       - name: Canary release
         if: steps.version-packages.outputs.success == '1'
+        # Authenticates with npm trusted publishing (OIDC), not a token.
         run: pnpm release:canary
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true

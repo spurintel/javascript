@@ -36,6 +36,11 @@ jobs:
           node-version: 22
           cache: 'pnpm'
 
+      - name: Upgrade npm for trusted publishing
+        # npm trusted publishing (OIDC) needs npm >= 11.5.1; Node 22 ships npm 10.
+        # pnpm publish hands the upload to this npm.
+        run: npm install -g npm@11.21.2
+
       - name: Install dependencies
         run: pnpm install
 
@@ -52,4 +57,5 @@ jobs:
           version: pnpm version-packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # No NPM_TOKEN: with it unset, changesets/action publishes via npm
+          # trusted publishing (OIDC, needs id-token: write above).
