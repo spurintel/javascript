@@ -19,8 +19,8 @@
     "yalc:all": "for d in packages/*/; do echo $d; cd $d; pnpm yalc push --replace --sig; cd '../../'; done"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.2",
-    "@eslint/js": "^9.25.1",
+    "@changesets/cli": "^2.31.1",
+    "@eslint/js": "^9.39.5",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
@@ -29,8 +29,8 @@
     "@types/react-dom": "catalog:react",
     "@typescript-eslint/eslint-plugin": "^8.31.0",
     "@typescript-eslint/parser": "^8.31.0",
-    "@vitejs/plugin-react": "^4.4.1",
-    "eslint": "^9.25.1",
+    "@vitejs/plugin-react": "^4.7.0",
+    "eslint": "^9.39.5",
     "eslint-config-prettier": "^9.1.0",
     "jsdom": "^26.1.0",
     "prettier": "^3.5.3",
@@ -39,9 +39,10 @@
     "turbo": "^2.9.14",
     "typescript": "catalog:repo",
     "typescript-eslint": "^8.31.0",
-    "vitest": "^4.1.11",
+    "vite": "^6.4.5",
+    "vitest": "^4.1.12",
     "yalc": "1.0.0-pre.53",
-    "yaml": "^2.7.1",
+    "yaml": "^2.9.1",
     "zx": "catalog:repo"
   },
   "packageManager": "pnpm@10.8.0",
@@ -51,11 +52,6 @@
   "pnpm": {
     "patchedDependencies": {
       "yalc@1.0.0-pre.53": "patches/yalc@1.0.0-pre.53.patch"
-    },
-    "overrides": {
-      "vite": "^6.4.3",
-      "tinypool": "^2.1.2",
-      "@vitest/mocker": "^4.1.12"
     }
   }
 }
